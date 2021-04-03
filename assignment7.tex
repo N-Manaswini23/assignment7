@@ -141,7 +141,7 @@ Box-$2$ has $4$ red balls and $2$ green balls.\\
 Let $B \in \{1,2\} $ represent a random variable where $1$ represents selecting box-$1$ and $2$ represents selecting box-$2$.
 
 \begin{table}[h!]
-\resizebox{9cm}{!}
+\resizebox{\columnwidth}{!}
 { 
 \begin{tabular}{|c|c|c|}
 \hline
@@ -192,7 +192,35 @@ We need to find $\pr{B=1|R=1}$ \\
 
  $\therefore$ The desired probability that box-$1$ is selected $= \frac{1}{3}$ \\
  
+ 
+\textbf{markov chain} \\
+\begin{tikzpicture}[font=\sffamily]
 
+
+   \tikzset{node style/.style={state, 
+                               minimum width=2cm,
+                               line width=1mm,
+                               fill=blue!20!white}}
+
+    \node[node style] at (0, 0)     (B=1)     {B=1};
+    \node[node style] at (6, 0)     (B=2)     {B=2};
+    \node[node style] at (3, -5.196) (R=1) {R=1};
+
+
+   \draw[every loop,
+         auto=right,
+         line width=1mm,
+         >=latex,
+         draw=green,
+         fill=green]
+            (B=1)     edge[bend right=20]   node {$\frac{1}{3}$} (R=1)
+            (B=1)     edge[loop above]      node {$\frac{1}{2}$} (B=1)
+            (B=2)     edge[loop above]      node {$\frac{1}{2}$} (B=2)
+            (B=2) edge[bend right=20, auto=left] node {$\frac{2}{3}$} (R=1)
+            (R=1) edge[bend right=20]       node {$\frac{2}{3}$} (B=2)
+            (R=1) edge[bend right=20, auto=left] node {$\frac{1}{3}$} (B=1);
+    \end{tikzpicture} 
+ 
  
 \begin{figure}[htb!]
 \begin{center}
