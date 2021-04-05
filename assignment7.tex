@@ -192,7 +192,13 @@ We need to find $\pr{B=1|R=1}$ \\
 
  $\therefore$ The desired probability that box-$1$ is selected $= \frac{1}{3}$ \\
  
- 
+ \begin{figure}[htb!]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{assignment7sim.png}
+\end{center}
+\end{figure}
+
+ \section*{SOLUTION USING MARKOV CHAIN}
 \textbf{markov chain} \\
 \begin{tikzpicture}[font=\sffamily]
 
@@ -215,12 +221,31 @@ We need to find $\pr{B=1|R=1}$ \\
          fill=green]
             (B=1)     edge[bend right=20]   node {$\frac{1}{3}$} (R=1)
             (B=1)     edge[loop above]      node {$\frac{1}{2}$} (B=1)
+            (R=1)     edge[loop below]      node {$\frac{1}{2}$} (R=1)
             (B=2)     edge[loop above]      node {$\frac{1}{2}$} (B=2)
             (B=2) edge[bend right=20, auto=left] node {$\frac{2}{3}$} (R=1)
             (R=1) edge[bend right=20]       node {$\frac{2}{3}$} (B=2)
+            (B=2) edge[bend right=20, auto=left] node {$\frac{1}{2}$} (B=1)
+            (B=1) edge[bend right=20, auto=left] node {$\frac{1}{2}$} (B=2)
             (R=1) edge[bend right=20, auto=left] node {$\frac{1}{3}$} (B=1);
+            
     \end{tikzpicture} 
- 
+            
+Let us represent the above markov chain diagram in a transition matrix $P$.\\
+Let states $\{1,2,3\}$ correspond to events $\{B=1,B=2,R=1\}$ respectively.\\
+The value of $P_{ij}$ is equal to probability of transition from state $i$ to state $j$
+\begin{align}
+P=\begin{bmatrix}
+\frac{1}{2}&\frac{1}{2}&\frac{1}{3}\\
+\frac{1}{2}&\frac{1}{2}&\frac{2}{3}\\
+\frac{1}{3}&\frac{2}{3}&\frac{1}{2}
+\end{bmatrix} \label{matrix}
+\end{align}
+ We need to find $\pr{B=1|R=1}$
+\begin{align}
+  \pr{B=1|R=1}&=P_{31} \label{31}\\
+ \therefore \pr{B=1|R=1}&=\frac{1}{3}
+\end{align}  
  
 \begin{figure}[htb!]
 \begin{center}
@@ -228,10 +253,5 @@ We need to find $\pr{B=1|R=1}$ \\
 \end{center}
 \end{figure}
 
-\begin{figure}[htb!]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{assignment7sim.png}
-\end{center}
-\end{figure}
 
 \end{document}
